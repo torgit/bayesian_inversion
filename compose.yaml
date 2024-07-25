@@ -1,0 +1,23 @@
+services:
+  exahype2:
+    image: mzzn84/inverse-problem:fast3
+    privileged: true
+    container_name: exahype2
+    platform: linux/amd64
+    stdin_open: true
+    tty: true
+    deploy:
+      resources:
+        reservations:
+          cpus: '1'
+        limits:
+          cpus: '6'
+    environment:
+      - OMP_NUM_THREADS=2
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "4243:4242"
+    volumes:
+      - ./volume:/shared
